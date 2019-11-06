@@ -1,0 +1,135 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  color: rgb(7, 1, 1);
+  font-size: 30rpx;
+  margin-right: 10rpx;
+  margin-left: 10rpx;
+}
+
+.divLine{
+  background: #E0E3DA;
+  width: 100%;
+  height: 2rpx;
+}
+.divLine_bottom{
+  background: #E0E3DA;
+  width: 100%;
+  height: 2rpx;
+  margin-top: 40rpx;
+}
+
+.title{
+  font-size: 50rpx;
+  margin-top: 20rpx;
+  margin-bottom: 40rpx;
+}
+
+.content_p{
+  font-size: 34rpx;
+  margin-top: 5rpx;
+}
+.content_p text{
+  text-indent: 2em;
+  text-align: left;
+}
+
+.table_snow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom:20rpx;
+  font-size: 36rpx;
+}
+
+.table_snow .detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 100rpx;
+  width: 50%;
+  border: 1rpx solid rgba(15, 15, 15, 0.2);
+  box-sizing: border-box;
+}
+
+.table_snow_title{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  font-size: 32rpx;
+  margin-top: 20rpx;
+}
+.table_wind {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom:20rpx;
+  font-size: 36rpx;
+}
+
+.table_wind .detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 100rpx;
+  width: 25%;
+  border: 1rpx solid rgba(15, 15, 15, 0.2);
+  box-sizing: border-box;
+}
+.table_wind .head{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 100rpx;
+  width: 25%;
+  border: 1rpx solid rgba(15, 15, 15, 0.2);
+  box-sizing: border-box;
+  font-size: 24rpx;
+  background: gray
+}
+
+ .recommend {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 180rpx;
+  flex-wrap: wrap;
+  margin-bottom:20rpx;
+  
+}
+
+.btn {
+  border: rgba(20, 196, 158, 0.5);
+  border-radius: 40rpx;
+  border-width: 1rpx;
+  border-style: solid;
+  width: 80%;
+  height: 80rpx;
+  font-size: 36rpx;
+  background: rgba(0, 0, 0, 0);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn1::after{
+  border: none;
+}
+
+.recommend .tips{
+  font-size: 32rpx;
+  margin-top: 20rpx;
+}
+
+.recommend .btn image {
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 16rpx;
+}

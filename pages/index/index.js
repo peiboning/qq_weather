@@ -85,7 +85,7 @@ Page({
       openSettingButtonShow: false,
       searchCity: location,
     })
-    wx.stopPullDownRefresh()
+    qq.stopPullDownRefresh()
     //添加星期信息
     var daily_forecast = data.daily_forecast;
     for(var i =0;i<daily_forecast.length;i++){
@@ -98,7 +98,7 @@ Page({
     // 存下来源数据
     data.updateTime = now.getTime()
     data.updateTimeFormat = utils.formatDate(now, "MM-dd hh:mm")
-    wx.setStorage({
+    qq.setStorage({
       key: 'cityDatas',
       data,
     })
@@ -107,40 +107,23 @@ Page({
     })
   },
   fail(res) {
-    wx.stopPullDownRefresh()
+    qq.stopPullDownRefresh()
     let errMsg = res.errMsg || ''
     // 拒绝授权地理位置权限
     if (errMsg.indexOf('deny') !== -1 || errMsg.indexOf('denied') !== -1) {
       this.setData({
         isShowLocationTips:true
       })
-      wx.showToast({
+      qq.showToast({
         title: '需要开启地理位置权限',
         icon: 'none',
         duration: 2500,
         success: (res) => {
-          // if (this.canUseOpenSettingApi()) {
-          //   // let timer = setTimeout(() => {
-          //   //   clearTimeout(timer)
-          //   //   wx.openSetting({
-          //   //     success(res) {
-          //   //       console.log("openSetting:"+res.authSetting)
-          //   //       // res.authSetting = {
-          //   //       //   "scope.userInfo": true,
-          //   //       //   "scope.userLocation": true
-          //   //       // }
-          //   //     }
-          //   //   })
-          //   // }, 2500)
-          // } else {
-          //   this.setData({
-          //     openSettingButtonShow: true,
-          //   })
-          // }
         },
       })
     } else {
-      wx.showToast({
+      console.log("failmsg:" + errMsg)
+      qq.showToast({
         title: '网络不给力，请稍后再试',
         icon: 'none',
       })
@@ -176,7 +159,7 @@ Page({
       this.dance()
       return
     }
-    wx.pageScrollTo({
+    qq.pageScrollTo({
       scrollTop: 0,
       duration: 300,
     })
@@ -189,8 +172,8 @@ Page({
     }
     callback && callback()
   },
-  // wx.openSetting 要废弃，button open-type openSetting 2.0.7 后支持
-  // 使用 wx.canIUse('openSetting') 都会返回 true，这里判断版本号区分
+  // qq.openSetting 要废弃，button open-type openSetting 2.0.7 后支持
+  // 使用 qq.canIUse('openSetting') 都会返回 true，这里判断版本号区分
   canUseOpenSettingApi () {
     let systeminfo = getApp().globalData.systeminfo
     let SDKVersion = systeminfo.SDKVersion
@@ -202,19 +185,20 @@ Page({
     }
   },
   init(params, callback) {
+    console.log("init function")
     this.setData({
       located: true,
     })
-    wx.getLocation({
+    qq.getLocation({
+      type: 'wgs84',
       success: (res) => {
-        console.log(res)
+        console.log("init success:"+res)
         this.getWeather(`${res.latitude},${res.longitude}`)
         this.getHourly(`${res.latitude},${res.longitude}`)
         callback && callback()
-        
-
       },
       fail: (res) => {
+        console.log("init fail:"+res)
         this.fail(res)
       }
     })
@@ -223,7 +207,7 @@ Page({
   getAirInfo(data){
     var that = this;
     var location = data.basic.parent_city;
-    wx.request({
+    qq.request({
       url: `${globalData.requestUrl.air}`,
       data: {
         location,
@@ -245,7 +229,7 @@ Page({
   },
 
   getWeather (location) {
-    wx.request({
+    qq.request({
       url: `${globalData.requestUrl.weather}`,
       data: {
         location,
@@ -259,7 +243,7 @@ Page({
             this.success(data, location)
             this.getAirInfo(data)
           } else {
-            wx.showToast({
+            qq.showToast({
               title: '查询失败',
               icon: 'none',
             })
@@ -267,7 +251,7 @@ Page({
         }
       },
       fail: () => {
-        wx.showToast({
+        qq.showToast({
           title: '查询失败',
           icon: 'none',
         })
@@ -275,7 +259,7 @@ Page({
     })
   },
   getHourly(location) {
-    wx.request({
+    qq.request({
       url: `${globalData.requestUrl.hourly}`,
       data: {
         location,
@@ -292,7 +276,7 @@ Page({
         }
       },
       fail: () => {
-        wx.showToast({
+        qq.showToast({
           title: '查询失败',
           icon: 'none',
         })
@@ -304,7 +288,7 @@ Page({
     this.reloadPage();
   },
   getCityDatas() {
-    let cityDatas = wx.getStorage({
+    let cityDatas = qq.getStorage({
       key: 'cityDatas',
       success: (res) => {
         this.setData({
@@ -357,13 +341,13 @@ Page({
    
   setNavigationBarColor (color) {
     let bcgColor = color || this.data.bcgColor
-    wx.setNavigationBarColor({
+    qq.setNavigationBarColor({
       frontColor: '#ffffff',
       backgroundColor: this.data.bcgColor,
     })
   },
   getBroadcast (callback) {
-    wx.cloud.callFunction({
+    qq.cloud.callFunction({
       name: 'getBroadcast',
       data: {
         hour: new Date().getHours(),
@@ -384,9 +368,12 @@ Page({
     })
   },
   reloadWeather () {
+    console.log("reloadWeather..............");
     if (this.data.located) {
+      console.log("reloadWeather1..............");
       this.init({})
     } else {
+      console.log("reloadWeather2..............");
       this.search(this.data.searchCity)
       this.setData({
         searchCity: '',
@@ -395,7 +382,7 @@ Page({
   },
   onShow() {
     console.log("onShow..............");
-    wx.getSystemInfo({
+    qq.getSystemInfo({
       success: function(res) {
         console.log("getSystemInfo.............." + res.SDKVersion);
       },
@@ -403,7 +390,7 @@ Page({
     this.reloadKnowledgeDotStatus();
     var that = this;
     // 检查权限
-    wx.getSetting({
+    qq.getSetting({
       success: function (res){
         if (res.authSetting["scope.userLocation"] == true){
           if(that.data.isShowLocationTips){
@@ -418,7 +405,7 @@ Page({
           that.setData({
             isShowLocationTips: true
           })
-          wx.showToast({
+          qq.showToast({
             title: '获取地理位置权限失败',
             icon: 'none',
           })
@@ -435,7 +422,7 @@ Page({
     this.setBcgImg1();//按时间来定背景
     this.reloadPage();
     console.log('onloaded');
-    var query = wx.createSelectorQuery();
+    var query = qq.createSelectorQuery();
     query.select("#search").boundingClientRect();
     query.exec(function (res) {
       that.data.searchHeight = res[0].height;
@@ -453,15 +440,15 @@ Page({
   },
   checkUpdate (setting) {
     // 兼容低版本
-    if (!setting.forceUpdate || !wx.getUpdateManager) {
+    if (!setting.forceUpdate || !qq.getUpdateManager) {
       return
     }
-    let updateManager = wx.getUpdateManager()
+    let updateManager = qq.getUpdateManager()
     updateManager.onCheckForUpdate((res) => {
       console.error(res)
     })
     updateManager.onUpdateReady(function () {
-      wx.showModal({
+      qq.showModal({
         title: '更新提示',
         content: '新版本已下载完成，是否重启应用？',
         success: function (res) {
@@ -486,18 +473,18 @@ Page({
     let dataset = e.currentTarget.dataset
     let src = dataset.src
     let index = dataset.index
-    wx.setStorage({
+    qq.setStorage({
       key: 'bcgImgIndex',
       data: index,
     })
   },
   toCitychoose () {
-    wx.navigateTo({
+    qq.navigateTo({
       url: '/pages/citychoose/citychoose',
     })
   },
   initSetting (successFunc) {
-    wx.getStorage({
+    qq.getStorage({
       key: 'setting',
       success: (res) => {
         let setting = res.data || {}
@@ -566,40 +553,40 @@ Page({
   },
   menuToCitychoose () {
     this.menuMain()
-    wx.navigateTo({
+    qq.navigateTo({
       url: '/pages/citychoose/citychoose',
     })
   },
   menuToSetting () {
     this.menuMain()
-    wx.navigateTo({
+    qq.navigateTo({
       url: '/pages/setting/setting',
     })
   },
   menuToAbout () {
     this.menuMain()
-    wx.navigateTo({
+    qq.navigateTo({
       url: '/pages/about/about',
     })
   },
   popp() {
-    let animationMain = wx.createAnimation({
+    let animationMain = qq.createAnimation({
       duration: 200,
       timingFunction: 'ease-out'
     })
-    let animationOne = wx.createAnimation({
+    let animationOne = qq.createAnimation({
       duration: 200,
       timingFunction: 'ease-out'
     })
-    let animationTwo = wx.createAnimation({
+    let animationTwo = qq.createAnimation({
       duration: 200,
       timingFunction: 'ease-out'
     })
-    let animationThree = wx.createAnimation({
+    let animationThree = qq.createAnimation({
       duration: 200,
       timingFunction: 'ease-out'
     })
-    let animationFour = wx.createAnimation({
+    let animationFour = qq.createAnimation({
       duration: 200,
       timingFunction: 'ease-out'
     })
@@ -617,23 +604,23 @@ Page({
     })
   },
   takeback() {
-    let animationMain = wx.createAnimation({
+    let animationMain = qq.createAnimation({
       duration: 200,
       timingFunction: 'ease-out'
     })
-    let animationOne = wx.createAnimation({
+    let animationOne = qq.createAnimation({
       duration: 200,
       timingFunction: 'ease-out'
     })
-    let animationTwo = wx.createAnimation({
+    let animationTwo = qq.createAnimation({
       duration: 200,
       timingFunction: 'ease-out'
     })
-    let animationThree = wx.createAnimation({
+    let animationThree = qq.createAnimation({
       duration: 200,
       timingFunction: 'ease-out'
     })
-    let animationFour = wx.createAnimation({
+    let animationFour = qq.createAnimation({
       duration: 200,
       timingFunction: 'ease-out'
     })
@@ -651,7 +638,7 @@ Page({
     })
   },
   hiddenGuidView() {
-    let animationHidden = wx.createAnimation({
+    let animationHidden = qq.createAnimation({
       duration: 500,
       timingFunction: 'ease-out',
     })
@@ -689,10 +676,10 @@ Page({
   },
   gotoWeatherKnowledge(){
     console.log("gotoWeatherKnowledge")
-    wx.navigateTo({
+    qq.navigateTo({
       url: '/pages/knowledge/knowledge',
     })
-    wx.setStorage({
+    qq.setStorage({
       key: 'showKnowledgeDot',
       data: 0,
     })
@@ -700,7 +687,7 @@ Page({
 
   reloadKnowledgeDotStatus(){
     var that = this;
-    wx.getStorage({
+    qq.getStorage({
       key: 'showKnowledgeDot',
       success: function(res) {
         that.setData({
@@ -718,6 +705,36 @@ Page({
   },
   launchAppError(e) {
     console.log("app launch:"+e.detail.errMsg)
+  },
+
+  seeAdPage() {
+      let videoAd = qq.createRewardedVideoAd({
+              adUnitId: 'f3fbc3089d8f7b23e7cd487d2cd3c9ca'
+            })
+
+            videoAd.onError(function(res){
+              console.log('videoAd onError',res)
+            })
+            videoAd.onLoad(function(res){
+              console.log('videoAd onLoad',res)
+            })
+            videoAd.onClose(function(res){
+              console.log('videoAd onClose',res)
+            })
+            
+            videoAd.load()
+              .then(() => {
+                console.log('激励视频加载成功');
+                videoAd.show().then(() => {
+                  console.log('激励视频 广告显示成功')
+                })
+                .catch(err => {
+                  console.log('激励视频 广告显示失败')
+                })
+              })
+              .catch(err => {
+                console.log('激励视频加载失败');
+              })
   },
 
 

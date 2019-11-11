@@ -53,6 +53,8 @@
     <view class='content_p'>
       <text decode='{{true}}'>&nbsp;&nbsp;PM2.5粒径小，活性强，易附带有毒、有害物质，被吸入人体后可以直接进入支气管，干扰肺部的气体交换，可能引发哮喘、支气管炎和心血管病等疾病。</text>
     </view>
+
+    <ad unit-id="16590e8e512cfb39369b45abca69445d"></ad>
   </view>
 
   <view class='pm' wx:if="{{showInfo == 2}}">
@@ -83,6 +85,7 @@
       <view class='detail'>50~80毫米</view><view class='detail'>大雪</view>
       <view class='detail'>>80毫米</view><view class='detail'>暴雪</view>
     </view>
+    <ad unit-id="60e6035b8e2509188e59c56952bd1999"></ad>
   </view>
 
   <view class='pm' wx:if="{{showInfo == 3}}">
@@ -111,6 +114,7 @@
       <view class='detail'>17级以上</view><view class='detail'>--</view><view class='detail'>>221</view><view class='detail'>--</view>
 
     </view>
+    <ad unit-id="02dd89907fcd35e557a0e1f0ff9c615f"></ad>
   </view>
 
   <!--推荐start-->

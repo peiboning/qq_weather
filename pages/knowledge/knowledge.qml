@@ -20,4 +20,12 @@
     <view class='arrow'/>
   </view>
   <view class='divLine'></view>
+
+  <view class='row_style' catchtap='rewardAd'>
+    <text>看视频广告</text>
+    <!-- <image src='/img/arrow.png'></image> -->
+    <view class='arrow'/>
+  </view>
+  <view class='divLine'></view>
+  <ad unit-id="f8df78818f611ed4b5757bff732e538b" type="card"></ad>
 </view>

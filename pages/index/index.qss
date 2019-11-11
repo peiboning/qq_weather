@@ -189,6 +189,30 @@ page {
   border-bottom-left-radius: 40rpx;
   background: rgba(37, 36, 36, 0.5);
 }
+
+.small_tips_ad{
+  display: block;
+  text-align: right;
+  font-size: 24rpx;
+  z-index: 101;
+  position: fixed;
+  top: 350rpx;
+  right: 0rpx;
+  align-items: center;
+  /* align-items: right; */
+}
+.small_tips_ad text{
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+  padding-left: 25rpx;
+  padding-right: 5rpx;
+  
+  border-top-left-radius: 40rpx;
+  border-bottom-left-radius: 40rpx;
+  background: rgba(37, 36, 36, 0.5);
+}
+
+
 .info .temp,
 .info .pm,
 .info .pm view,

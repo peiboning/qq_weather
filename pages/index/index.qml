@@ -20,6 +20,13 @@
     <view class='dot' wx:if='{{showKnowledgeDot == 1}}'></view>
   </view>
 
+  <view wx:if='{{!isShowLocationTips}}'> 
+    <view class='small_tips_ad' catchtap='seeAdPage'>
+      <text>看视频AD</text>
+    </view>
+    <view class='dot' wx:if='{{showKnowledgeDot == 1}}'></view>
+  </view>
+
   <!--引导-->
    <view class='guid'  animation="{{animationHiddenGuidView}}">
     <text>点击添加到我的桌面，下次使用更方便</text>
@@ -176,6 +183,8 @@
     </view>
     <!--分时温度 end-->
 
+    <ad unit-id="707d6be104ac90b432bc4f01641b1218"></ad>
+
     <!--7预报start-->
     <view class='guide' wx:if='{{cityDatas.daily_forecast}}'>
       <view class='title'>7 天预报</view>
@@ -227,6 +236,7 @@
         </view>
       </view> 
     </view>
+    <ad unit-id="bc51a1b92c097a1b1c24615c4f81db69"></ad>
     <view class='footer'>到底了</view>
 
     <!--公众号start-->

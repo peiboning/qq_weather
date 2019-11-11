@@ -31,7 +31,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    let appbox = qq.createAppBox({
+              adUnitId: '8b592f47866d4754aabeb1e63f277847'
+            })
+            appbox.load().then(()=>{
+              appbox.show()
+            })
   },
 
   /**

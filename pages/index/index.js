@@ -380,8 +380,10 @@ Page({
       })
     }
   },
+  
   onShow() {
     console.log("onShow..............");
+    
     qq.getSystemInfo({
       success: function(res) {
         console.log("getSystemInfo.............." + res.SDKVersion);
@@ -389,6 +391,9 @@ Page({
     })
     this.reloadKnowledgeDotStatus();
     var that = this;
+    // setTimeout(function(){
+    //   that.loadInerstitialAd();
+    // }, 6000 * 2)
     // 检查权限
     qq.getSetting({
       success: function (res){
@@ -417,6 +422,7 @@ Page({
       that.hiddenGuidView();
     }, 6000)
   },
+  
   onLoad () {
     var that = this;
     this.setBcgImg1();//按时间来定背景
@@ -469,20 +475,14 @@ Page({
       bcgImgAreaShow: false,
     })
   },
-  chooseBcg (e) {
-    let dataset = e.currentTarget.dataset
-    let src = dataset.src
-    let index = dataset.index
-    qq.setStorage({
-      key: 'bcgImgIndex',
-      data: index,
-    })
-  },
+  
   toCitychoose () {
     qq.navigateTo({
       url: '/pages/citychoose/citychoose',
     })
   },
+
+
   initSetting (successFunc) {
     qq.getStorage({
       key: 'setting',
@@ -569,6 +569,32 @@ Page({
       url: '/pages/about/about',
     })
   },
+
+  loadInerstitialAd() {
+      /* 建议放在onReady里执行，提前加载广告 */
+      let InterstitialAd = qq.createInterstitialAd({
+        adUnitId: '69f5167200348d359cedb6c844300a12'
+      });
+
+      InterstitialAd.load().catch((err) => {
+              console.error('load',err)
+            })        
+            InterstitialAd.onLoad(() => {
+              /* 建议放在需要展示插屏广告的时机执行 */
+            InterstitialAd.show().catch((err) => {
+              console.error('show',err)
+            })
+            })
+            InterstitialAd.onClose(() => {
+              console.log('close event emit')
+            })       
+            InterstitialAd.onError((e) => {
+              console.log('error', e)
+            })    
+            
+            
+  },
+
   popp() {
     let animationMain = qq.createAnimation({
       duration: 200,

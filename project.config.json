@@ -19,6 +19,7 @@
 	},
 	"qqappid": "1109941641",
 	"projectname": "%E7%94%9F%E6%B4%BB%E5%A4%A9%E6%B0%94",
+	"qqLibVersion": "1.9.0",
 	"condition": {
 		"search": {
 			"current": -1,

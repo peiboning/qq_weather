@@ -224,6 +224,7 @@
         </button>
         
     </view>
+    <ad unit-id="38e2bb5b2112087c3ad3481cd5302ca7"></ad>
     <!--推荐end-->
 
     <!--生活指数-->
@@ -236,6 +237,7 @@
         </view>
       </view> 
     </view>
+    <!-- <ad unit-id="0b81b95f8154ef0a55c77061ae2c722a" type="card"></ad> -->
     <ad unit-id="bc51a1b92c097a1b1c24615c4f81db69"></ad>
     <view class='footer'>到底了</view>
 

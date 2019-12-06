@@ -35,6 +35,8 @@ App({
   },
   globalData: {
     // 是否保持常亮，离开小程序失效
+    integral: 100,
+    xcx_version:'1.0.7',
     keepscreenon:false,
     systeminfo: {},
     isIPhoneX: false,

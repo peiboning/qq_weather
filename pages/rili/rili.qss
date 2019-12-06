@@ -1,0 +1,4 @@
+/* pages/rili/rili.wxss */
+.ad {
+    margin-top:30rpx;
+}
